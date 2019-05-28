@@ -5,7 +5,7 @@ import redis
 import flask
 import calendar
 import dateutil.parser
-from gevent.wsgi import WSGIServer
+from gevent.pywsgi import WSGIServer
 from flask import Flask, jsonify
 from flask_cors import CORS, cross_origin
 

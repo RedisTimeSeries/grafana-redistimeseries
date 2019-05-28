@@ -18,6 +18,9 @@ A HTTP Server to serve metrics to Grafana via the simple-json-datasource
 
 4. Query the datasource by a specific key, or * for a wildcard, for example: `stats_counts.http.*`
 
+### Dependencies
+To install the needed dependencies just run: pip install -r requirements.txt
+
 ### GrafanaDatastoreServer.py Usage
 ```
 usage: GrafanaDatastoreServer.py [-h] [--host HOST] [--port PORT]
