@@ -1,3 +1,9 @@
+[![license](https://img.shields.io/github/license/RedisTimeSeries/grafana-redistimeseries.svg)](https://github.com/RedisTimeSeries/grafana-redistimeseries)
+[![CircleCI](https://circleci.com/gh/RedisTimeSeries/grafana-redistimeseries/tree/master.svg?style=svg)](https://circleci.com/gh/RedisTimeSeries/grafana-redistimeseries/tree/master)
+[![GitHub issues](https://img.shields.io/github/release/RedisTimeSeries/grafana-redistimeseries.svg)](https://github.com/RedisTimeSeries/grafana-redistimeseries/releases/latest)
+[![Codecov](https://codecov.io/gh/RedisTimeSeries/grafana-redistimeseries/branch/master/graph/badge.svg)](https://codecov.io/gh/RedisTimeSeries/grafana-redistimeseries)
+
+
 # RedisTimeSeries-Datasource
 Grafana Datasource for RedisTimeSeries
 
