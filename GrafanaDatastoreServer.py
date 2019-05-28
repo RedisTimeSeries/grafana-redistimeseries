@@ -13,6 +13,20 @@ app = Flask(__name__)
 CORS(app)
 
 REDIS_POOL = None
+SCAN_TYPE_SCRIPT = """local cursor, pat, typ, cnt = ARGV[1], ARGV[2], ARGV[3], ARGV[4] or 100
+local rep = {}
+
+local res = redis.call('SCAN', cursor, 'MATCH', pat, 'COUNT', cnt)
+while #res[2] > 0 do
+  local k = table.remove(res[2])
+  local t = redis.call('TYPE', k)
+  if t['ok'] == typ then
+    table.insert(rep, k)
+  end
+end
+
+rep = {tonumber(res[1]), rep}
+return rep"""
 
 @app.route('/')
 @cross_origin()
@@ -23,7 +37,15 @@ def hello_world():
 @cross_origin()
 def search():
     redis_client = redis.Redis(connection_pool=REDIS_POOL)
-    return jsonify(redis_client.keys())
+    result = []
+    cursor = 0
+    while True:
+        cursor, keys = redis_client.eval(SCAN_TYPE_SCRIPT, 0, cursor, "*", "TSDB-TYPE", 100)
+        result.extend(keys)
+        if cursor == 0:
+            break
+
+    return jsonify(result)
 
 def process_targets(targets, redis_client):
     result = []
