@@ -38,13 +38,9 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            REDIS_PORT=6379 coverage run test_commands.py
+            REDIS_PORT=6379 coverage run test.py
             codecov
             
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
-
 workflows:
   version: 2
   commit:
