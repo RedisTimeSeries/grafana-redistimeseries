@@ -8,7 +8,7 @@ services:
 
   grafana:
     build:
-      context: ./example/grafana
+      context: ../grafana
       dockerfile: Dockerfile
     ports:
       - "127.0.0.1:3000:3000"
@@ -17,7 +17,7 @@ services:
 
   grafana_redis_source:
     build:
-      context: ./
+      context: ../../
       dockerfile: Dockerfile
     environment:
       - "REDIS_HOST=redis"
@@ -28,8 +28,9 @@ services:
       - ts
 
   producer:
+    restart: always
     build:
-      context: ./example/producer/
+      context: producer
       dockerfile: Dockerfile
     environment:
       - "REDIS_HOST=redis"
