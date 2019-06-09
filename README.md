@@ -7,6 +7,13 @@
 # RedisTimeSeries-Datasource
 Grafana Datasource for RedisTimeSeries
 
+## QuickStart
+You can tryout the `Grafana Datasource for RedisTimeSeries` with RedisTimeSeries and Grafana in a single docker compose
+```bash
+cd compose
+docker-compose up
+```
+Grafana can be accessed on port 3000 (admin:admin)
 
 ## Grafana Datastore API Server
 ### Overview

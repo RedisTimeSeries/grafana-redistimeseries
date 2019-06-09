@@ -1,32 +1,18 @@
 version: '3'
 services:
-
   redis:
-    image: redislabs/redistimeseries
-    networks:
-      - ts
-
-  grafana:
-    build:
-      context: grafana
-      dockerfile: Dockerfile
+    image: "redislabs/redistimeseries:edge"
     ports:
-      - "127.0.0.1:3000:3000"
-    networks:
-      - ts
-
+      - "6379:6379"
   grafana_redis_source:
-    build:
-      context: ..
-      dockerfile: Dockerfile
+    build: ../.
     environment:
       - "REDIS_HOST=redis"
     depends_on:
       - redis
-      - grafana
-    networks:
-      - ts
-
-networks:
-  ts:
-    driver: bridge
+  grafana:
+    build: ./grafana/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - grafana_redis_source
