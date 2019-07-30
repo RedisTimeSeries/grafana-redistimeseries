@@ -73,7 +73,7 @@ def query():
             args += ['avg', int(round(request['intervalMs']/1000))]
         print(args)
         redis_resp = redis_client.execute_command(*args)
-        datapoints = [(x2.decode("ascii"), x1*1000) for x1, x2 in redis_resp]
+        datapoints = [(float(x2.decode("ascii")), x1*1000) for x1, x2 in redis_resp]
         response.append(dict(target=target, datapoints=datapoints))
     return jsonify(response)
 
