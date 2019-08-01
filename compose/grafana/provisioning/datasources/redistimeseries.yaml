@@ -1,0 +1,12 @@
+# config file version
+apiVersion: 1
+
+datasources:
+- name: RedisTimeSeries
+  type: grafana-simple-json-datasource
+  access: proxy
+  orgId: 1
+  url: http://grafana_redis_source:8080
+  isDefault: true
+  version: 1
+  editable: true
