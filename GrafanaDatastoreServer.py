@@ -43,7 +43,7 @@ def search():
     cursor = 0
     while True:
         cursor, keys = redis_client.eval(SCAN_TYPE_SCRIPT, 0, cursor, "*", "TSDB-TYPE", 100)
-        result.extend(keys)
+        result.extend([k.decode("ascii") for k in keys])
         if cursor == 0:
             break
 
@@ -53,7 +53,7 @@ def process_targets(targets, redis_client):
     result = []
     for target in targets:
         if '*' in target:
-            result.extend(redis_client.keys(target))
+            result.extend([k.decode('ascii') for k in redis_client.keys(target)])
         else:
             result.append(target)
     return result
