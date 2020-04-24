@@ -3,8 +3,10 @@
 [![GitHub issues](https://img.shields.io/github/release/RedisTimeSeries/grafana-redistimeseries.svg)](https://github.com/RedisTimeSeries/grafana-redistimeseries/releases/latest)
 [![Codecov](https://codecov.io/gh/RedisTimeSeries/grafana-redistimeseries/branch/master/graph/badge.svg)](https://codecov.io/gh/RedisTimeSeries/grafana-redistimeseries)
 
-
 # RedisTimeSeries-Datasource
+[![Forum](https://img.shields.io/badge/Forum-RedisTimeSeries-blue)](https://forum.redislabs.com/c/modules/redistimeseries)
+[![Gitter](https://badges.gitter.im/RedisLabs/RedisTimeSeries.svg)](https://gitter.im/RedisLabs/RedisTimeSeries?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Grafana Datasource for RedisTimeSeries
 
 ## QuickStart
