@@ -51,3 +51,6 @@ optional arguments:
   --redis-port REDIS_PORT
                         redis server port
 ```
+
+#### Note about timezone
+Grafana uses UTC timestamps to query its datastores. This datastore will use the same timestamps to query Redis, which means that it assumes all timestamps are UTC based.

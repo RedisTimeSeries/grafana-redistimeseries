@@ -12,8 +12,6 @@ from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
-EPOCH = datetime(1970, 1, 1, 0, 0, 0)
-
 REDIS_POOL = None
 SCAN_TYPE_SCRIPT = """local cursor, pat, typ, cnt = ARGV[1], ARGV[2], ARGV[3], ARGV[4] or 100
 local rep = {}
@@ -63,11 +61,9 @@ def query():
     request = flask.request.get_json()
     response = []
 
-    # !!! dates 'from' and 'to' are expected to be in UTC, which is what Grafana provides here.
-    # If not in UTC, use pytz to set to UTC timezone and subtract the utcoffset().
-    # Time delta calculations should always be done in UTC to avoid pitfalls of daylight offset changes.
-    stime = (dateutil.parser.parse(request['range']['from']) - EPOCH) / timedelta(milliseconds=1)
-    etime = (dateutil.parser.parse(request['range']['to']) - EPOCH) / timedelta(milliseconds=1)
+    # dates 'from' and 'to' are expected to be in UTC, which is what Grafana provides here.
+    stime = dateutil.parser.parse(request['range']['from']).timestamp() * 1000
+    etime = dateutil.parser.parse(request['range']['to']).timestamp() * 1000
 
     redis_client = redis.Redis(connection_pool=REDIS_POOL)
     targets = process_targets([t['target'] for t in request['targets']], redis_client)

@@ -1,11 +1,13 @@
-FROM python:alpine3.9
+FROM python:3-alpine
+
 
 WORKDIR /app/
 
 COPY requirements.txt /app/
-RUN apk add --no-cache --virtual build-deps gcc musl-dev libffi-dev \
-    && pip install -r requirements.txt \
-    && apk del build-deps
+
+RUN apk update && apk add --no-cache --virtual build-deps build-base gcc musl-dev libffi-dev libev-dev
+RUN pip install -r requirements.txt
+RUN apk del build-deps
 
 COPY GrafanaDatastoreServer.py /app/
 
